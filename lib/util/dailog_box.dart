@@ -15,17 +15,25 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(16),
+      ),
       backgroundColor: Colors.yellow[200],
+      title: const Text(
+        "Add Task",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
       content: SizedBox(
-        height: 150,
+        height: 125,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
               controller: controller,
-              decoration: const InputDecoration(
-                hintText: "Add a new task",
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                hintText: "Enter task name...",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
 
@@ -35,15 +43,19 @@ class DialogBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 // Cancel Button
-                ElevatedButton(
+                OutlinedButton(
                   onPressed: onCancel,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey,
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.red,
+                    side: const BorderSide(color: Colors.red),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   child: const Text("Cancel"),
                 ),
 
-                const SizedBox(width: 10),
+                const SizedBox(width: 12),
 
                 // Save Button
                 ElevatedButton(
@@ -51,6 +63,9 @@ class DialogBox extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                     foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   child: const Text("Save"),
                 ),

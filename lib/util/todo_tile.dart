@@ -4,12 +4,14 @@ class TodoTile extends StatelessWidget {
   final String taskName;
   final bool taskCompleted;
   final Function(bool?)? onChanged;
+  final VoidCallback? onDelete;
 
   const TodoTile({
     super.key,
     required this.taskName,
     required this.taskCompleted,
     required this.onChanged,
+    required this.onDelete,
   });
 
   @override
@@ -22,22 +24,31 @@ class TodoTile extends StatelessWidget {
           color: Colors.yellow,
           borderRadius: BorderRadius.circular(12.0),
         ),
-
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween, // space items
           children: [
-            Checkbox(
-              value: taskCompleted,
-              onChanged: onChanged,
+            Row(
+              children: [
+                Checkbox(
+                  value: taskCompleted,
+                  onChanged: onChanged,
+                ),
+                Text(
+                  taskName,
+                  style: TextStyle(
+                    fontSize: 18,
+                    decoration:
+                        taskCompleted ? TextDecoration.lineThrough : null,
+                  ),
+                ),
+              ],
             ),
 
-            Text(
-              taskName,
-              style: TextStyle(
-                fontSize: 18,
-                decoration:
-                    taskCompleted ? TextDecoration.lineThrough : null,
-              ),
-            ),
+            // DELETE ICON
+            IconButton(
+              icon: const Icon(Icons.delete),
+              onPressed: onDelete,
+            )
           ],
         ),
       ),
